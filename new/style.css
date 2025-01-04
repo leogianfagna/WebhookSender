@@ -1,0 +1,40 @@
+:root {
+    --main-color: #313338;
+    --side-bg-color: #2B2D31;
+    --main-font-color: #C7CBCD;
+    --hover-color: #5865F2;
+}
+
+body {
+    background-color: var(--main-color);
+    margin: 0;
+    color: var(--main-font-color);
+}
+
+#horizontal-nav {
+    background-color: var(--side-bg-color);
+}
+
+
+
+
+
+.card-submit-button {
+    background-color: var(--main-color);
+    border-color: var(--main-color);
+    color: var(--main-font-color);
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 1em;
+    letter-spacing: 1px;
+
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.card-submit-button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    border-radius: 8px;
+}
