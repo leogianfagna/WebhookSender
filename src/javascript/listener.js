@@ -1,10 +1,12 @@
 const serverSelect = document.getElementById('server');
+const patchNotes = document.getElementById("patch").value;
 
 
 serverSelect.addEventListener('change', (event) => {
     const selectedValue = event.target.value;
-    const saveRef = selectedValue + "_version";
-    const latestVersion = localStorage.getItem(saveRef);
+
+    const latestVersion = localStorage.getItem(selectedValue + "_version");
+    const draftSaved = localStorage.getItem(selectedValue + "_draft");
 
     // Preenche a próxima versão apenas se encontrar
     if (latestVersion) {
@@ -14,5 +16,13 @@ serverSelect.addEventListener('change', (event) => {
         document.getElementById('patch-version').value = newVersion;
     } else {
         document.getElementById('patch-version').value = "";
+    }
+
+    // Preenche com o rascunho salvo
+    console.log(draftSaved);
+    if (draftSaved) {
+        document.getElementById('patch').value = draftSaved;
+    } else {
+        document.getElementById('patch').value = "";
     }
 });

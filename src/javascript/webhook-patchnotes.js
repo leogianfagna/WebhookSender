@@ -124,3 +124,11 @@ function saveLatestVersion() {
     const saveRef = serverSelected + "_version";
     localStorage.setItem(saveRef, versionNumber);
 }
+
+function savePatchDraft() {
+    const patchNotes = document.getElementById("patch").value;
+    const serverSelect = document.getElementById('server').value;
+    const saveRef = serverSelect + "_draft";
+    console.log("Salvo rascunho " + patchNotes + " para o saveRef = " + saveRef);
+    localStorage.setItem(saveRef, patchNotes);
+}

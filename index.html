@@ -37,7 +37,8 @@
                     <p>Adição de itens</p>
                     <div class="row g-3 mb-3">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Versão da atualização" id="patch-version">
+                            <input type="text" class="form-control" placeholder="Versão da atualização"
+                                id="patch-version">
                         </div>
                         <div class="col">
                             <select class="form-select" id="server">
@@ -51,15 +52,17 @@
                             </select>
                         </div>
                         <div class="col">
+                            <label for="patch-webhook-url" class="form-label" style="display: none;"></label>
                             <input type="text" class="form-control" placeholder="Webhook URL" id="patch-webhook-url">
                         </div>
 
                     </div>
                     <div class="col mb-3">
-                        <label for="patch" class="form-label">Example textarea</label>
                         <textarea class="form-control" id="patch" rows="3" placeholder="Descrição do patch"></textarea>
                     </div>
-                    <button type="button" onclick="sendWebhook();">Enviar</button>
+                    <button type="button" class="btn btn-success">Salvar Webhook URL</button>
+                    <button type="button" class="btn btn-success" onclick="savePatchDraft();">Salvar Rascunho</button>
+                    <button type="button" class="btn btn-success" onclick="sendWebhook();">Enviar</button>
                 </form>
             </div>
 
@@ -104,6 +107,7 @@
                         <input class="form-control" type="file" id="image" accept="image/*">
                     </div>
 
+                    <button type="button" class="btn btn-success">Salvar Webhook URL</button>
                     <button type="button" class="btn btn-success" onclick="sendEventWebhook();">Enviar</button>
                 </div>
             </div>
@@ -197,8 +201,8 @@
                                 </div>
 
 
-                                <button type="button" class="btn btn-success"
-                                    onclick="sendStatusWebhook();">Enviar</button>
+                                <button type="button" class="btn btn-success">Salvar Webhook URL</button>
+                                <button type="button" class="btn btn-success" onclick="sendStatusWebhook();">Enviar</button>
                             </div>
                         </div>
                     </div>
