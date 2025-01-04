@@ -1,7 +1,7 @@
-function enviarWebhook() {
-    const webhookUrl = document.getElementById('webhook-url').value;
+function sendEventWebhook() {
+    const webhookUrl = document.getElementById('event-webhook-url').value;
     const message = document.getElementById('message').value;
-    const server = document.getElementById('server').value;
+    const server = document.getElementById('server-event').value;
     const eventTitle = document.getElementById('eventTitle').value;
     const dateStartInput = document.getElementById('dateStart').value;
     const dateEndInput = document.getElementById('dateEnd').value;

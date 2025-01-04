@@ -1,123 +1,219 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt_BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enviar Mensagem para Discord</title>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="src/css/styles.css">
-  <link rel="stylesheet" href="src/css/cards-animations.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aaa Mensagem para Discord</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/css/style.css">
 </head>
 
-<body class="container indexBody">
-  <div id="mainTittle">
-    <h1>Webhooks prontos para enviar</h1>
-    <p style="margin-top: -40px;">Envie Webhooks para o Discord com modelos já preenchidos.</p>
-  </div>
-  <div id="cartoes">
-    <div class="card" id="webhookEventos">
-      <div class="content">
-        <div class="back">
-          <div class="back-content">
-            <span class="material-symbols-outlined">edit_calendar</span>
-            <strong>Usar!</strong>
-            <p class="card-footer" style="margin-top: -20px;">Aviso de eventos.</p>
-          </div>
-        </div>
-        <div class="front">
+<body class="vh-100">
+    <div class="h-100">
+        <div class="row h-100 g-0 text-center">
 
-          <div class="img">
-            <div class="circle">
+            <!-- Nav lateral -->
+            <div id="horizontal-nav" class="col-3 d-flex flex-column justify-content-center text-center p-5">
+                <h1 class="mb-4">Webhooks Templates</h1>
+                <button type="submit" class="btn btn-primary card-submit-button mb-3"
+                    onclick="showDiv('events-div');">Aviso de eventos</button>
+                <button type="submit" class="btn btn-primary card-submit-button mb-3"
+                    onclick="showDiv('status-div');">Status do servidor</button>
+                <button type="submit" class="btn btn-primary card-submit-button mb-5"
+                    onclick="showDiv('patchnotes-div');">Patch Notes</button>
+                <p>Criado por @leogianfagna.<br>Feito com os modelos que uso no meu servidor. 😄</p>
             </div>
-            <div class="circle" id="right">
-            </div>
-            <div class="circle" id="bottom">
-            </div>
-          </div>
 
-          <div class="front-content">
-            <small class="badge">Minecraft</small>
-            <div class="description">
-              <div class="title">
-                <p class="title">
-                  <strong>Marca eventos com imagens e data de inicialização.</strong>
-                </p>
-                <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                  <g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none"
-                    font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10"
-                    stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero"
-                    fill="#20c997">
-                    <g transform="scale(8,8)">
-                      <path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <p class="card-footer">
-                Suporta EPOCH time e imagens.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="card" id="webhookStatus">
-      <div class="content">
-        <div class="back">
-          <div class="back-content">
-            <span class="material-symbols-outlined">wifi</span>
-            <strong>Usar!</strong>
-            <p class="card-footer" style="margin-top: -20px;">Status do servidor.</p>
-          </div>
-        </div>
-        <div class="front">
+            <!-- Main content -->
 
-          <div class="img">
-            <div class="circle">
-            </div>
-            <div class="circle" id="right">
-            </div>
-            <div class="circle" id="bottom">
-            </div>
-          </div>
+            <!-- Patch notes -->
+            <div id="patchnotes-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
+                <p>Coluna 222</p>
 
-          <div class="front-content">
-            <small class="badge">Minecraft</small>
-            <div class="description">
-              <div class="title">
-                <p class="title">
-                  <strong>Envia o status do sistema/servidor e avisos de manutenção.</strong>
-                </p>
-                <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                  <g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none"
-                    font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10"
-                    stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero"
-                    fill="#20c997">
-                    <g transform="scale(8,8)">
-                      <path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <p class="card-footer">
-                5 opções.
-              </p>
+                <form>
+                    <p>Adição de itens</p>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Versão da atualização" id="version">
+                        </div>
+                        <div class="col">
+                            <select class="form-select" id="server">
+                                <option value="0" selected>Servidor</option>
+                                <option value="Henesys">Henesys</option>
+                                <option value="Vanillew">Vanillew</option>
+                                <option value="Skyten">Skyten</option>
+                                <option value="Ausevento">Ausevento</option>
+                                <option value="Lobby">Lobby</option>
+                                <option value="Rede">Rede</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Webhook URL" id="patch-webhook-url">
+                        </div>
+
+                    </div>
+                    <div class="col mb-3">
+                        <label for="patch" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="patch" rows="3" placeholder="Descrição do patch"></textarea>
+                    </div>
+                    <button type="button" onclick="sendWebhook();">Enviar</button>
+                </form>
             </div>
-          </div>
+
+            <!-- Send event alert -->
+            <div id="events-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
+                <div class="container">
+                    <h1>Enviar Mensagem para Discord</h1>
+
+                    <div class="mb-3">
+                        <label for="event-webhook-url" class="form-label">Link do webhook:</label>
+                        <input type="text" class="form-control" id="event-webhook-url">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="server-event" class="form-label">Servidor:</label>
+                        <input type="text" class="form-control" id="server-event">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="eventTitle" class="form-label">Título do evento:</label>
+                        <input type="text" class="form-control" id="eventTitle">
+                        <div id="tituloEventoHelp" class="form-text">Apenas primeiras letras em maíusculas.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Descrição do evento:</label>
+                        <textarea class="form-control" id="message" rows="5"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dateStart" class="form-label">Data início:</label>
+                        <input type="datetime-local" class="form-control" id="dateStart">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dateEnd" class="form-label">Data fim:</label>
+                        <input type="datetime-local" class="form-control" id="dateEnd">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Default file input example</label>
+                        <input class="form-control" type="file" id="image" accept="image/*">
+                    </div>
+
+                    <button type="button" class="btn btn-success" onclick="sendEventWebhook();">Enviar</button>
+                </div>
+            </div>
+
+            <!-- Send server status -->
+            <div id="status-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
+                <div>
+                    <h1 style="margin-top: 30px;">Enviar atualização de status</h1>
+
+                    <div class="form-container">
+                        <div class="forms">
+                            <div class="mb-3">
+                                <label for="status-webhook-url" class="form-label">Link do webhook:</label>
+                                <input type="text" class="form-control" id="status-webhook-url">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="webhook-type" class="form-label">Tipo de status à enviar:</label>
+                                <select id="webhook-type" class="form-select" aria-label="Default select example">
+                                    <!-- <option selected>Selecionar</option> -->
+                                    <option value="manutencaoAgendada">Manutenção agendada</option>
+                                    <!-- <option value="2">Servidor instável</option> -->
+                                    <option value="servidorOffline">Servidor off-line</option>
+                                    <option value="manutencaoFinalizada">Manutenção finalizada</option>
+                                </select>
+                            </div>
+
+                            <div id="agendamento">
+                                <div class="mb-3">
+                                    <label for="servidor" class="form-label">Servidor:</label>
+                                    <select id="servidor" class="form-select" aria-label="Default select example">
+                                        <option selected>Selecionar</option>
+                                        <option value="Rede">Rede</option>
+                                        <option value="Henesys">Henesys</option>
+                                        <option value="Vanillew">Vanillew</option>
+                                        <option value="Skyten">Skyten</option>
+                                        <option value="Auseventos">Auseventos</option>
+                                        <option value="Lobbys">Lobbys</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3" id="div-manutencao-start">
+                                    <label for="manutencao-dateStart" class="form-label">Quando inicia:</label>
+                                    <input type="datetime-local" class="form-control" id="manutencao-dateStart">
+                                </div>
+
+                                <div class="mb-3" id="div-manutencao-previsao">
+                                    <label for="duracao-prevista" class="form-label">Duração prevista:</label>
+                                    <input type="text" class="form-control" id="duracao-prevista">
+                                    <div id="tituloEventoHelp" class="form-text hint">Ex: 20 minutos</div>
+                                </div>
+
+                                <div class="mb-3" id="div-manutencao-motivos">
+                                    <label for="motivos-manutencao" class="form-label">Motivos:</label>
+                                    <textarea class="form-control" id="motivos-manutencao" rows="5"></textarea>
+                                </div>
+
+                                <div id="div-manutencao-radio-notas-extras">
+                                    <div class="form-check form-switch" style="margin-bottom: 5px;">
+                                        <input class="form-check-input" type="checkbox" role="switch" value=""
+                                            id="notas-extra-manutencao" checked>
+                                        <label class="form-check-label" for="notas-extra-manutencao">Notas
+                                            extras:</label>
+                                    </div>
+                                    <div class="mb-3" id="notas-da-manutencao">
+                                        <label for="notas-manutencao" class="form-label">Notas:</label>
+                                        <textarea class="form-control" id="notas-manutencao" rows="5"></textarea>
+                                    </div>
+                                </div>
+
+                                <div id="div-motivos-offline" style="display: none;">
+                                    <h3>Motivos do servidor off-line:</h3>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">Manutenção programada
+                                            iniciada.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">Manutenção de emergência
+                                            necessária.</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">Prevenção
+                                            severa.</label>
+                                    </div>
+                                </div>
+
+
+                                <button type="button" class="btn btn-success"
+                                    onclick="sendStatusWebhook();">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div id="mainTittle" style="margin-top: 100px;">
-    <p>Criado por @leogianfagna.</p>
-    <p style="margin-top: -12px;">Feito com os modelos que uso no meu servidor. 😄</p>
-  </div>
-  <script src="src/javascript/listener.js"></script>
+
+        <script src="src/javascript/webhook-status.js"></script>
+        <script src="src/javascript/webhook-event.js"></script>
+        <script src="src/javascript/webhook-patchnotes.js"></script>
+        <script src="src/javascript/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.0.1/luxon.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -77,7 +77,7 @@ function getWebhookTitle() {
 function sendWebhook() {
     const serverInfos = getServerInfo();
 
-    const webhookUrl = document.getElementById("url").value;
+    const webhookUrl = document.getElementById("patch-webhook-url").value;
     const webhookContent = indentPatchNotes();
     const webhookTitle = getWebhookTitle();
     const webhookImage = serverInfos[0];

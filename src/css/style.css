@@ -9,13 +9,16 @@ body {
     background-color: var(--main-color);
     margin: 0;
     color: var(--main-font-color);
+    font-family: 'Kufam-Regular', sans-serif;
 }
 
 #horizontal-nav {
     background-color: var(--side-bg-color);
 }
 
-
+.hide-content {
+    display: none !important;
+}
 
 
 
@@ -37,4 +40,11 @@ body {
     background-color: var(--hover-color);
     border-color: var(--hover-color);
     border-radius: 8px;
+}
+
+@font-face {
+    font-family: 'Kufam-Regular';
+    src: url('/src/fonts/kafum/Kufam-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }

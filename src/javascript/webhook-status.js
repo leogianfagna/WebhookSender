@@ -5,8 +5,8 @@ const textarea = document.getElementById('motivos-manutencao');
 const textarea2 = document.getElementById('notas-manutencao');
 textPresets();
 
-function enviarWebhook() {
-    const webhookUrl = document.getElementById('webhook-url').value;
+function sendStatusWebhook() {
+    const webhookUrl = document.getElementById('status-webhook-url').value;
     const embed = tipoDeWebhook();
 
     const payload = JSON.stringify({
@@ -50,7 +50,7 @@ function tipoDeWebhook() {
 
 function embedManutencaoAgendada() {
     const servidor = document.getElementById('servidor').value;
-    const horario = document.getElementById('dateStart').value;
+    const horario = document.getElementById('manutencao-dateStart').value;
     const previsao = document.getElementById('duracao-prevista').value;
     const motivos = document.getElementById('motivos-manutencao').value;
     const notas = document.getElementById('notas-manutencao').value;
