@@ -69,7 +69,7 @@ function getServerInfo() {
 
 function getWebhookTitle() {
     const serverSelected = document.getElementById("server").value;
-    const versionNumber = document.getElementById("version").value;
+    const versionNumber = document.getElementById("patch-version").value;
 
     return "**Nota de atualização " + serverSelected + "** `" + versionNumber + "`";
 }
@@ -84,7 +84,6 @@ function sendWebhook() {
     const webhookColor = parseInt(serverInfos[1], 16);
     console.log("Server infos: " + serverInfos);
 
-    // Corpo do webhook
     const payload = {
         embeds: [
             {
@@ -98,7 +97,6 @@ function sendWebhook() {
         ]
     };
 
-    // Enviar o webhook usando fetch
     fetch(webhookUrl, {
         method: "POST",
         headers: {
@@ -109,6 +107,7 @@ function sendWebhook() {
     .then(response => {
         if (response.ok) {
             console.log("Webhook enviado com sucesso!");
+            saveLatestVersion();
         } else {
             console.error("Erro ao enviar webhook:", response.status, response.statusText);
         }
@@ -116,4 +115,12 @@ function sendWebhook() {
     .catch(error => {
         console.error("Erro de conexão ao enviar webhook:", error);
     });
+}
+
+function saveLatestVersion() {
+    const serverSelected = document.getElementById("server").value;
+    const versionNumber = document.getElementById("patch-version").value;
+
+    const saveRef = serverSelected + "_version";
+    localStorage.setItem(saveRef, versionNumber);
 }
