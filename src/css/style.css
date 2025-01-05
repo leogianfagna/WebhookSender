@@ -3,6 +3,11 @@
     --side-bg-color: #2B2D31;
     --main-font-color: #C7CBCD;
     --hover-color: #5865F2;
+
+    --label-input: #383A40;
+    --label-text: #DBDEE1;
+    --label-text-placeholder: #797c83;
+    --label-focus: #393B48;
 }
 
 body {
@@ -19,8 +24,6 @@ body {
 .hide-content {
     display: none !important;
 }
-
-
 
 .card-submit-button {
     background-color: var(--main-color);
@@ -47,4 +50,24 @@ body {
     src: url('/src/fonts/kafum/Kufam-Regular.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
+}
+
+/* Boostrap overlay */
+.form-select,
+.form-control {
+    background-color: var(--label-input);
+    border: var(--label-input);
+    color: var(--label-text);
+}
+
+.form-control:focus, 
+.form-select:focus {
+    background-color: var(--label-focus);
+    border-color: var(--label-input-focus-border);
+    color: var(--label-text-focus);
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+    color: var(--label-text-placeholder);
 }
