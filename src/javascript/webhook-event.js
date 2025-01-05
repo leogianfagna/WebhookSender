@@ -1,11 +1,11 @@
 function sendEventWebhook() {
     const webhookUrl = document.getElementById('event-webhook-url').value;
-    const message = document.getElementById('message').value;
-    const server = document.getElementById('server-event').value;
-    const eventTitle = document.getElementById('eventTitle').value;
-    const dateStartInput = document.getElementById('dateStart').value;
-    const dateEndInput = document.getElementById('dateEnd').value;
-    const imageInput = document.getElementById('image').files[0];
+    const message = document.getElementById('event-description').value;
+    const server = document.getElementById('event-server').value;
+    const eventTitle = document.getElementById('event-title').value;
+    const dateStartInput = document.getElementById('event-date-start').value;
+    const dateEndInput = document.getElementById('event-date-end').value;
+    const imageInput = document.getElementById('event-image').files[0];
 
     if (!webhookUrl || !message || !dateStartInput) {
         alert('Por favor, preencha todos os campos.');
@@ -43,12 +43,12 @@ function sendEventWebhook() {
 };
 
 // Adicionando suporte para Ctrl+V (colar imagem do clipboard)
-document.addEventListener('paste', function(event) {
+document.addEventListener('paste', function (event) {
     const items = event.clipboardData.items;
     for (let i = 0; i < items.length; i++) {
         if (items[i].type.indexOf('image') !== -1) {
             const file = items[i].getAsFile();
-            const imageInput = document.getElementById('image');
+            const imageInput = document.getElementById('event-image');
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             imageInput.files = dataTransfer.files;

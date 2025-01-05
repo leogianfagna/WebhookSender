@@ -1,5 +1,5 @@
 function indentPatchNotes() {
-    const patchNotes = document.getElementById("patch").value;
+    const patchNotes = document.getElementById("patch-content").value;
     const replacements = {
         "feat:": "✨ ",
         "improv:": "🔧 ",
@@ -63,12 +63,12 @@ function getServerInfo() {
         "ausevento": "d188fd"
     };
 
-    const serverSelected = document.getElementById("server").value.toLowerCase();
+    const serverSelected = document.getElementById("patch-server").value.toLowerCase();
     return [urls[serverSelected], colors[serverSelected]];
 }
 
 function getWebhookTitle() {
-    const serverSelected = document.getElementById("server").value;
+    const serverSelected = document.getElementById("patch-server").value;
     const versionNumber = document.getElementById("patch-version").value;
 
     return "**Nota de atualização " + serverSelected + "** `" + versionNumber + "`";
@@ -104,21 +104,21 @@ function sendWebhook() {
         },
         body: JSON.stringify(payload)
     })
-    .then(response => {
-        if (response.ok) {
-            console.log("Webhook enviado com sucesso!");
-            saveLatestVersion();
-        } else {
-            console.error("Erro ao enviar webhook:", response.status, response.statusText);
-        }
-    })
-    .catch(error => {
-        console.error("Erro de conexão ao enviar webhook:", error);
-    });
+        .then(response => {
+            if (response.ok) {
+                console.log("Webhook enviado com sucesso!");
+                saveLatestVersion();
+            } else {
+                console.error("Erro ao enviar webhook:", response.status, response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error("Erro de conexão ao enviar webhook:", error);
+        });
 }
 
 function saveLatestVersion() {
-    const serverSelected = document.getElementById("server").value;
+    const serverSelected = document.getElementById("patch-server").value;
     const versionNumber = document.getElementById("patch-version").value;
 
     const saveRef = serverSelected + "_version";
@@ -126,8 +126,8 @@ function saveLatestVersion() {
 }
 
 function savePatchDraft() {
-    const patchNotes = document.getElementById("patch").value;
-    const serverSelect = document.getElementById('server').value;
+    const patchNotes = document.getElementById("patch-content").value;
+    const serverSelect = document.getElementById("patch-server").value;
     const saveRef = serverSelect + "_draft";
     console.log("Salvo rascunho " + patchNotes + " para o saveRef = " + saveRef);
     localStorage.setItem(saveRef, patchNotes);

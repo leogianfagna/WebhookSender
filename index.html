@@ -31,17 +31,17 @@
 
             <!-- Patch notes -->
             <div id="patchnotes-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
-                <p>Coluna 222</p>
+                <h1>Patch Notes</h1>
+                <p class="mb-5">Enviar uma nota de atualização formatada para a comunidade.</p>
 
                 <form>
-                    <p>Adição de itens</p>
                     <div class="row g-3 mb-3">
                         <div class="col">
                             <input type="text" class="form-control" placeholder="Versão da atualização"
                                 id="patch-version">
                         </div>
                         <div class="col">
-                            <select class="form-select" id="server">
+                            <select class="form-select" id="patch-server">
                                 <option value="0" selected>Servidor</option>
                                 <option value="Henesys">Henesys</option>
                                 <option value="Vanillew">Vanillew</option>
@@ -55,12 +55,14 @@
                             <label for="patch-webhook-url" class="form-label" style="display: none;"></label>
                             <input type="text" class="form-control" placeholder="Webhook URL" id="patch-webhook-url">
                         </div>
+                    </div>
 
+                    <div class="mb-3">
+                        <textarea class="form-control" id="patch-content" rows="6"
+                            placeholder="Descrição do patch"></textarea>
                     </div>
-                    <div class="col mb-3">
-                        <textarea class="form-control" id="patch" rows="3" placeholder="Descrição do patch"></textarea>
-                    </div>
-                    <button type="button" class="btn btn-success">Salvar Webhook URL</button>
+
+                    <button type="submit" class="btn btn-success">Salvar Webhook URL</button>
                     <button type="button" class="btn btn-success" onclick="savePatchDraft();">Salvar Rascunho</button>
                     <button type="button" class="btn btn-success" onclick="sendWebhook();">Enviar</button>
                 </form>
@@ -68,145 +70,139 @@
 
             <!-- Send event alert -->
             <div id="events-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
-                <div class="container">
-                    <h1>Enviar Mensagem para Discord</h1>
+                <h1>Anunciar eventos</h1>
+                <p class="mb-5">Enviar um aviso de evento com data de início para a comunidade.</p>
 
-                    <div class="mb-3">
-                        <label for="event-webhook-url" class="form-label">Link do webhook:</label>
-                        <input type="text" class="form-control" id="event-webhook-url">
+                <form>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="event-title" class="form-label">Título do evento:</label>
+                            <input type="text" class="form-control" id="event-title">
+                        </div>
+                        <div class="col">
+                            <label for="event-server" class="form-label">Servidor:</label>
+                            <input type="text" class="form-control" id="event-server">
+                        </div>
+                        <div class="col">
+                            <label for="event-webhook-url" class="form-label">Link do webhook:</label>
+                            <input type="text" class="form-control" id="event-webhook-url">
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="server-event" class="form-label">Servidor:</label>
-                        <input type="text" class="form-control" id="server-event">
+                        <label for="event-description" class="form-label">Descrição do evento:</label>
+                        <textarea class="form-control" id="event-description" rows="5"></textarea>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="event-date-start" class="form-label">Data início:</label>
+                            <input type="datetime-local" class="form-control" id="event-date-start">
+                        </div>
+                        <div class="col">
+                            <label for="event-date-end" class="form-label">Data fim:</label>
+                            <input type="datetime-local" class="form-control" id="event-date-end">
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="eventTitle" class="form-label">Título do evento:</label>
-                        <input type="text" class="form-control" id="eventTitle">
-                        <div id="tituloEventoHelp" class="form-text">Apenas primeiras letras em maíusculas.</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Descrição do evento:</label>
-                        <textarea class="form-control" id="message" rows="5"></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="dateStart" class="form-label">Data início:</label>
-                        <input type="datetime-local" class="form-control" id="dateStart">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="dateEnd" class="form-label">Data fim:</label>
-                        <input type="datetime-local" class="form-control" id="dateEnd">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Default file input example</label>
-                        <input class="form-control" type="file" id="image" accept="image/*">
+                        <label for="event-image" class="form-label">Default file input example</label>
+                        <input class="form-control" type="file" id="event-image" accept="image/*">
                     </div>
 
                     <button type="button" class="btn btn-success">Salvar Webhook URL</button>
                     <button type="button" class="btn btn-success" onclick="sendEventWebhook();">Enviar</button>
-                </div>
+
+                </form>
             </div>
 
             <!-- Send server status -->
             <div id="status-div" class="col-9 d-flex flex-column justify-content-center p-5 hide-content">
-                <div>
-                    <h1 style="margin-top: 30px;">Enviar atualização de status</h1>
+                <h1>Status do servidor</h1>
+                <p class="mb-5">Informar a comunidade sobre mudanças no status do servidor.</p>
 
-                    <div class="form-container">
-                        <div class="forms">
-                            <div class="mb-3">
-                                <label for="status-webhook-url" class="form-label">Link do webhook:</label>
-                                <input type="text" class="form-control" id="status-webhook-url">
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="webhook-type" class="form-label">Tipo de status à enviar:</label>
-                                <select id="webhook-type" class="form-select" aria-label="Default select example">
-                                    <!-- <option selected>Selecionar</option> -->
-                                    <option value="manutencaoAgendada">Manutenção agendada</option>
-                                    <!-- <option value="2">Servidor instável</option> -->
-                                    <option value="servidorOffline">Servidor off-line</option>
-                                    <option value="manutencaoFinalizada">Manutenção finalizada</option>
-                                </select>
-                            </div>
-
-                            <div id="agendamento">
-                                <div class="mb-3">
-                                    <label for="servidor" class="form-label">Servidor:</label>
-                                    <select id="servidor" class="form-select" aria-label="Default select example">
-                                        <option selected>Selecionar</option>
-                                        <option value="Rede">Rede</option>
-                                        <option value="Henesys">Henesys</option>
-                                        <option value="Vanillew">Vanillew</option>
-                                        <option value="Skyten">Skyten</option>
-                                        <option value="Auseventos">Auseventos</option>
-                                        <option value="Lobbys">Lobbys</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3" id="div-manutencao-start">
-                                    <label for="manutencao-dateStart" class="form-label">Quando inicia:</label>
-                                    <input type="datetime-local" class="form-control" id="manutencao-dateStart">
-                                </div>
-
-                                <div class="mb-3" id="div-manutencao-previsao">
-                                    <label for="duracao-prevista" class="form-label">Duração prevista:</label>
-                                    <input type="text" class="form-control" id="duracao-prevista">
-                                    <div id="tituloEventoHelp" class="form-text hint">Ex: 20 minutos</div>
-                                </div>
-
-                                <div class="mb-3" id="div-manutencao-motivos">
-                                    <label for="motivos-manutencao" class="form-label">Motivos:</label>
-                                    <textarea class="form-control" id="motivos-manutencao" rows="5"></textarea>
-                                </div>
-
-                                <div id="div-manutencao-radio-notas-extras">
-                                    <div class="form-check form-switch" style="margin-bottom: 5px;">
-                                        <input class="form-check-input" type="checkbox" role="switch" value=""
-                                            id="notas-extra-manutencao" checked>
-                                        <label class="form-check-label" for="notas-extra-manutencao">Notas
-                                            extras:</label>
-                                    </div>
-                                    <div class="mb-3" id="notas-da-manutencao">
-                                        <label for="notas-manutencao" class="form-label">Notas:</label>
-                                        <textarea class="form-control" id="notas-manutencao" rows="5"></textarea>
-                                    </div>
-                                </div>
-
-                                <div id="div-motivos-offline" style="display: none;">
-                                    <h3>Motivos do servidor off-line:</h3>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">Manutenção programada
-                                            iniciada.</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">Manutenção de emergência
-                                            necessária.</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">Prevenção
-                                            severa.</label>
-                                    </div>
-                                </div>
-
-
-                                <button type="button" class="btn btn-success">Salvar Webhook URL</button>
-                                <button type="button" class="btn btn-success" onclick="sendStatusWebhook();">Enviar</button>
-                            </div>
+                <form>
+                    <div class="row g-3 mb-3">
+                        <div class="col">
+                            <label for="status-type" class="form-label">Tipo de status à enviar:</label>
+                            <select id="status-type" class="form-select">
+                                <!-- <option selected>Selecionar</option> -->
+                                <option value="manutencaoAgendada">Manutenção agendada</option>
+                                <!-- <option value="2">Servidor instável</option> -->
+                                <option value="servidorOffline">Servidor off-line</option>
+                                <option value="manutencaoFinalizada">Manutenção finalizada</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="status-server" class="form-label">Servidor:</label>
+                            <select id="status-server" class="form-select">
+                                <option selected>Selecionar</option>
+                                <option value="Rede">Rede</option>
+                                <option value="Henesys">Henesys</option>
+                                <option value="Vanillew">Vanillew</option>
+                                <option value="Skyten">Skyten</option>
+                                <option value="Auseventos">Auseventos</option>
+                                <option value="Lobbys">Lobbys</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="status-webhook-url" class="form-label">Link do webhook:</label>
+                            <input type="text" class="form-control" id="status-webhook-url">
                         </div>
                     </div>
-                </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col" id="div-manutencao-start">
+                            <label for="status-date-start" class="form-label">Quando inicia:</label>
+                            <input type="datetime-local" class="form-control" id="status-date-start">
+                        </div>
+                        <div class="col" id="div-manutencao-previsao">
+                            <label for="status-previsao" class="form-label">Duração prevista:</label>
+                            <input type="text" class="form-control" id="status-previsao" placeholder="20 minutos">
+                        </div>
+                    </div>
+
+                    <div class="mb-3" id="div-manutencao-motivos">
+                        <label for="status-reason" class="form-label">Motivos:</label>
+                        <textarea class="form-control" id="status-reason" rows="5"></textarea>
+                    </div>
+
+                    <div id="div-manutencao-radio-notas-extras">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" role="switch" value=""
+                                id="status-extra-notes" checked>
+                            <label class="form-check-label" for="status-extra-notes">Notas
+                                extras:</label>
+                        </div>
+                        <div class="mb-3" id="notas-da-manutencao">
+                            <label for="status-notes" class="form-label">Notas:</label>
+                            <textarea class="form-control" id="status-notes" rows="5"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="div-motivos-offline" style="display: none;">
+                        <h3>Motivos do servidor off-line:</h3>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="manutencao-programada">
+                            <label class="form-check-label" for="manutencao-programada">Manutenção programada
+                                iniciada.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="manutencao-emergencia">
+                            <label class="form-check-label" for="manutencao-emergencia">Manutenção de emergência
+                                necessária.</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="manutencao-prevencao">
+                            <label class="form-check-label" for="manutencao-prevencao">Prevenção
+                                severa.</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Salvar Webhook URL</button>
+                    <button type="button" class="btn btn-success" onclick="sendStatusWebhook();">Enviar</button>
+
+                </form>
             </div>
         </div>
 

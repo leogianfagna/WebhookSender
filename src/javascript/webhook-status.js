@@ -1,8 +1,8 @@
-const selecaoNotas = document.getElementById('notas-extra-manutencao');
-const tipoDeStatus = document.getElementById('webhook-type');
+const selecaoNotas = document.getElementById('status-extra-notes');
+const tipoDeStatus = document.getElementById('status-type');
 const divDasNotas = document.getElementById('notas-da-manutencao');
-const textarea = document.getElementById('motivos-manutencao');
-const textarea2 = document.getElementById('notas-manutencao');
+const textarea = document.getElementById('status-reason');
+const textarea2 = document.getElementById('status-notes');
 textPresets();
 
 function sendStatusWebhook() {
@@ -21,16 +21,16 @@ function sendStatusWebhook() {
         },
         body: payload
     })
-    .then(response => {
-        if (response.ok) {
-            alert("Webhook enviado com sucesso!");
-        } else {
-            alert("Falha ao enviar o webhook.");
-        }
-    })
-    .catch(error => {
-        console.error("Erro ao enviar o webhook:", error);
-    });
+        .then(response => {
+            if (response.ok) {
+                alert("Webhook enviado com sucesso!");
+            } else {
+                alert("Falha ao enviar o webhook.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao enviar o webhook:", error);
+        });
 }
 
 function tipoDeWebhook() {
@@ -49,11 +49,11 @@ function tipoDeWebhook() {
 }
 
 function embedManutencaoAgendada() {
-    const servidor = document.getElementById('servidor').value;
-    const horario = document.getElementById('manutencao-dateStart').value;
-    const previsao = document.getElementById('duracao-prevista').value;
-    const motivos = document.getElementById('motivos-manutencao').value;
-    const notas = document.getElementById('notas-manutencao').value;
+    const servidor = document.getElementById('status-server').value;
+    const horario = document.getElementById('status-date-start').value;
+    const previsao = document.getElementById('status-previsao').value;
+    const motivos = document.getElementById('status-reason').value;
+    const notas = document.getElementById('status-notes').value;
 
     // Utilizando a biblioteca Luxon para manipulação de data e hora
     const DateTime = luxon.DateTime;
@@ -67,9 +67,9 @@ function embedManutencaoAgendada() {
 
     // Exibe as notas apenas se estiver habilitado
     if (divDasNotas.style.display != 'none') {
-        descricao+= "\n\n# :notepad_spiral: Notas:\n" + notas;
+        descricao += "\n\n# :notepad_spiral: Notas:\n" + notas;
     }
-    
+
     const embed = {
         title: "__**ATUALIZAÇÃO DO STATUS DA REDE**__",
         description: descricao,
@@ -80,12 +80,12 @@ function embedManutencaoAgendada() {
 }
 
 function embedManutencaoIniciada() {
-    const servidor = document.getElementById('servidor').value;
+    const servidor = document.getElementById('status-server').value;
     const previsao = document.getElementById('duracao-prevista').value;
     const selectedMotivo = getSelectedMotivo();
 
     var descricao = "Aviso de servidor indisponível, confira as informações abaixo.\n\n# :man_office_worker::skin-tone-1: Informações: \n- **Servidor:** " + servidor + "\n- **Duração prevista:** " + previsao + "\n\n# :pencil2: Motivo:\n- " + selectedMotivo + "\n\n# :placard: Aviso importante:\n- O servidor especificado tem a entrada indisponível durante a manutenção.\n- Será avisado neste canal quando retornar.\n- Atribua-se o cargo @status para ser notificado.";
-    
+
     const embed = {
         title: "__**ATUALIZAÇÃO DO STATUS DA REDE**__",
         description: descricao,
@@ -96,8 +96,8 @@ function embedManutencaoIniciada() {
 }
 
 function embedManutencaoFinalizada() {
-    const servidor = document.getElementById('servidor').value;
-    const notas = document.getElementById('notas-manutencao').value;
+    const servidor = document.getElementById('status-server').value;
+    const notas = document.getElementById('status-notes').value;
     var notaExtra = "";
 
     // Exibe as notas extras se estiver habilitado
@@ -107,8 +107,8 @@ function embedManutencaoFinalizada() {
 
     var descricao = "Servidores que estavam indisponível agora podem ser acessados novamente.\n\n# :love_letter: Notícias: \n- O servidor " + servidor + "** está online e disponível** novamente." + notaExtra + "\n\n# :snail: Recomendações:\n- Acompanhe as notas de atualização em <#880461818244517949>.\n- Conecte-se ao servidor com `jogar.austv.net`.";
 
-    
-    
+
+
     const embed = {
         title: "__**ATUALIZAÇÃO DO STATUS DA REDE**__",
         description: descricao,
@@ -118,7 +118,7 @@ function embedManutencaoFinalizada() {
     return embed;
 }
 
-selecaoNotas.addEventListener('click', function() {
+selecaoNotas.addEventListener('click', function () {
     if (selecaoNotas.checked) {
         divDasNotas.style.display = 'block';
     } else {
@@ -126,7 +126,7 @@ selecaoNotas.addEventListener('click', function() {
     }
 });
 
-tipoDeStatus.addEventListener('change', function() {
+tipoDeStatus.addEventListener('change', function () {
     mostrarTudo();
 
     switch (tipoDeStatus.value) {
@@ -145,7 +145,7 @@ tipoDeStatus.addEventListener('change', function() {
             document.getElementById('div-motivos-offline').style.display = 'none';
             textarea2.value = '- Tivemos mudanças na entrada do servidor.';
             break;
-            
+
         default:
             document.getElementById('div-motivos-offline').style.display = 'none';
             break;
@@ -162,11 +162,11 @@ function getSelectedMotivo() {
     const radioButtons = motivosOffline.querySelectorAll("input[type='radio']");
 
     for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-        // Encontrar o label associado ao rádio selecionado
-        const label = radioButton.nextElementSibling;
-        return label.textContent;
-      }
+        if (radioButton.checked) {
+            // Encontrar o label associado ao rádio selecionado
+            const label = radioButton.nextElementSibling;
+            return label.textContent;
+        }
     }
 
     return null;
@@ -179,5 +179,3 @@ function mostrarTudo() {
         elemento.style.display = 'block';
     });
 }
-
-
