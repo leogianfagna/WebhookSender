@@ -8,6 +8,11 @@
     --label-text: #DBDEE1;
     --label-text-placeholder: #797c83;
     --label-focus: #393B48;
+
+    --button-color: #484A51;
+    --button-hover-color: #62646C;
+    --button-tooltip-color: #111214;
+    --button-tooltip-text-color: #D5D8DC;
 }
 
 body {
@@ -54,26 +59,6 @@ body {
     font-style: normal;
 }
 
-/* Boostrap overlay */
-.form-select,
-.form-control {
-    background-color: var(--label-input);
-    border: var(--label-input);
-    color: var(--label-text);
-}
-
-.form-control:focus,
-.form-select:focus {
-    background-color: var(--label-focus);
-    border-color: var(--label-input-focus-border);
-    color: var(--label-text-focus);
-}
-
-.form-control::placeholder,
-.form-select::placeholder {
-    color: var(--label-text-placeholder);
-}
-
 /* Definição da animação */
 @keyframes stylishFadeIn {
     0% {
@@ -95,4 +80,36 @@ body {
 .stylish-appear {
     animation: stylishFadeIn 0.2s ease-out;
     will-change: transform, opacity;
+}
+
+/* Boostrap overlay */
+.form-select,
+.form-control {
+    background-color: var(--label-input);
+    border: var(--label-input);
+    color: var(--label-text);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--label-focus);
+    border-color: var(--label-input-focus-border);
+    color: var(--label-text-focus);
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+    color: var(--label-text-placeholder);
+}
+
+.btn-primary {
+    background-color: var(--button-color);
+    border-color: var(--button-color);
+    border-radius: 5px;
+    margin: 0rem 0.25rem;
+}
+
+.btn-primary:hover {
+    background-color: var(--button-hover-color);
+    border-color: var(--button-hover-color);
 }
