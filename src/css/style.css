@@ -15,6 +15,7 @@ body {
     margin: 0;
     color: var(--main-font-color);
     font-family: 'Kufam-Regular', sans-serif;
+    overflow: hidden;
 }
 
 #horizontal-nav {
@@ -37,6 +38,7 @@ body {
 
     padding-top: 3%;
     padding-bottom: 3%;
+    transition: border-radius 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .card-submit-button:hover {
@@ -60,7 +62,7 @@ body {
     color: var(--label-text);
 }
 
-.form-control:focus, 
+.form-control:focus,
 .form-select:focus {
     background-color: var(--label-focus);
     border-color: var(--label-input-focus-border);
@@ -70,4 +72,27 @@ body {
 .form-control::placeholder,
 .form-select::placeholder {
     color: var(--label-text-placeholder);
+}
+
+/* Definição da animação */
+@keyframes stylishFadeIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(10px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.stylish-appear {
+    animation: stylishFadeIn 0.2s ease-out;
+    will-change: transform, opacity;
 }

@@ -1,6 +1,7 @@
 function showDiv(div) {
     hideDiv();
     document.getElementById(div).classList.remove('hide-content');
+    document.getElementById(div).classList.add('stylish-appear');
 }
 
 function hideDiv() {
