@@ -54,7 +54,7 @@ body {
 
 @font-face {
     font-family: 'Kufam-Regular';
-    src: url('/src/assets/fonts/kafum/Kufam-Regular.ttf') format('opentype');
+    src: url('../assets/fonts/kafum/Kufam-Regular.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }

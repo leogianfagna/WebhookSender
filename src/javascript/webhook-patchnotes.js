@@ -1,14 +1,14 @@
 function indentPatchNotes() {
     const patchNotes = document.getElementById("patch-content").value;
     const replacements = {
-        "feat:": "✨ ",
-        "improv:": "🔧 ",
-        "perf:": "⚡ ",
-        "task:": "✅ ",
-        "change:": "🛠️ ",
-        "refact:": "♻️ ",
-        "fix:": "🐛 ",
-        "remove:": "❌ "
+        "feat:": "<:att_feat:1325932929301352508> ",
+        "improv:": "<:att_improv:1325932933491593227> ",
+        "perf:": "<:att_perfomance:1325932935118848060> ",
+        "task:": "<:att_task:1325932940089229522> ",
+        "change:": "<:att_change:1325932927686807613> ",
+        "refact:": "<:att_refact:1325932936737849365> ",
+        "fix:": "<:att_fix:1325932930853507277> ",
+        "remove:": "<:att_remove:1325906723407532102> "
     };
 
     // Organizar e substituir as ocorrências na string

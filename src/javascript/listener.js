@@ -1,6 +1,4 @@
-const serverSelect = document.getElementById('server');
-const patchNotes = document.getElementById("patch").value;
-
+const serverSelect = document.getElementById('patch-server');
 
 serverSelect.addEventListener('change', (event) => {
     const selectedValue = event.target.value;
@@ -19,10 +17,9 @@ serverSelect.addEventListener('change', (event) => {
     }
 
     // Preenche com o rascunho salvo
-    console.log(draftSaved);
     if (draftSaved) {
-        document.getElementById('patch').value = draftSaved;
+        document.getElementById('patch-content').value = draftSaved;
     } else {
-        document.getElementById('patch').value = "";
+        document.getElementById('patch-content').value = "";
     }
 });
