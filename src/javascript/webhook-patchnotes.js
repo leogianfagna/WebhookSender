@@ -39,11 +39,15 @@ function indentPatchNotes() {
         categorized[key].sort((a, b) => a.length - b.length);
     }
 
-    // Concatenar todas as categorias na ordem desejada
-    const sortedNotes = Object.values(categorized).flat().join('\n');
+    // Concatenar todas as categorias na ordem desejada, com uma linha em branco entre elas
+    const sortedNotes = Object.values(categorized)
+        .filter(category => category.length > 0) // Ignorar categorias vazias
+        .map(category => category.join('\n'))    // Concatenar linhas dentro de cada categoria
+        .join('\n\n');                           // Adicionar duas quebras de linha entre categorias
 
     return sortedNotes;
 }
+
 
 function getServerInfo() {
     const urls = {
