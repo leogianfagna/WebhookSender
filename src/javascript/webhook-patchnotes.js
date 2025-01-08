@@ -61,13 +61,14 @@ function getServerInfo() {
     const colors = {
         "henesys": "aec83a",
         "vanillew": "00d9ff",
-        "skyten:": "eb2664",
+        "skyten": "eb2664",
         "lobby": "372d86",
         "rede": "372d86",
         "ausevento": "d188fd"
     };
 
     const serverSelected = document.getElementById("patch-server").value.toLowerCase();
+    console.log("Cor selecionada: " + colors[serverSelected]);
     return [urls[serverSelected], colors[serverSelected]];
 }
 
