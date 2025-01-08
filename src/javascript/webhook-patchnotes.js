@@ -11,14 +11,12 @@ function indentPatchNotes() {
         "remove:": "<:att_remove:1325906723407532102> "
     };
 
-    // Organizar e substituir as ocorrências na string
     let formattedNotes = patchNotes;
     for (const [key, value] of Object.entries(replacements)) {
-        const regex = new RegExp(key, 'g'); // Criar um regex global para substituir todas as ocorrências
+        const regex = new RegExp(key, 'g');
         formattedNotes = formattedNotes.replace(regex, value);
     }
 
-    // Separar as linhas e organizá-las por categoria e tamanho
     const lines = formattedNotes.split('\n').filter(line => line.trim() !== "");
     const categorized = Object.keys(replacements).reduce((acc, key) => {
         acc[key] = [];
@@ -34,20 +32,12 @@ function indentPatchNotes() {
         }
     });
 
-    // Organizar cada categoria por tamanho da linha
     for (const key in categorized) {
         categorized[key].sort((a, b) => a.length - b.length);
     }
 
-    // Concatenar todas as categorias na ordem desejada, com uma linha em branco entre elas
-    const sortedNotes = Object.values(categorized)
-        .filter(category => category.length > 0) // Ignorar categorias vazias
-        .map(category => category.join('\n'))    // Concatenar linhas dentro de cada categoria
-        .join('\n\n');                           // Adicionar duas quebras de linha entre categorias
-
-    return sortedNotes;
+    return categorized;
 }
-
 
 function getServerInfo() {
     const urls = {
@@ -76,27 +66,49 @@ function getWebhookTitle() {
     const serverSelected = document.getElementById("patch-server").value;
     const versionNumber = document.getElementById("patch-version").value;
 
-    return "**Nota de atualização " + serverSelected + "** `" + versionNumber + "`";
+    return "__**Nota de atualização " + serverSelected + "**__ `" + versionNumber + "`";
 }
 
 function sendWebhook() {
     const serverInfos = getServerInfo();
-
     const webhookUrl = document.getElementById("patch-webhook-url").value;
-    const webhookContent = indentPatchNotes();
+    const categorizedNotes = indentPatchNotes();
     const webhookTitle = getWebhookTitle();
     const webhookImage = serverInfos[0];
     const webhookColor = parseInt(serverInfos[1], 16);
+    const keysTranslate = {
+        "feat:": "Adições",
+        "improv:": "Melhorias",
+        "perf:": "Performance aumentada",
+        "task:": "Feitos",
+        "change:": "Mudanças",
+        "refact:": "Sistemas refeitos",
+        "fix:": "Correções",
+        "remove:": "Remoções"
+    };
+
+    const fields = Object.entries(categorizedNotes).map(([key, notes]) => {
+        if (notes.length > 0) {
+            const keyName = keysTranslate[key];
+
+            return {
+                name: keyName,
+                value: notes.join('\n'),
+                inline: false
+            };
+        }
+        return null;
+    }).filter(field => field !== null);
 
     const payload = {
         embeds: [
             {
                 title: webhookTitle,
-                description: webhookContent,
                 color: webhookColor,
                 image: {
                     url: webhookImage
-                }
+                },
+                fields: fields
             }
         ]
     };
