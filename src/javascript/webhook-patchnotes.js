@@ -86,7 +86,6 @@ function sendWebhook() {
     const webhookTitle = getWebhookTitle();
     const webhookImage = serverInfos[0];
     const webhookColor = parseInt(serverInfos[1], 16);
-    console.log("Server infos: " + serverInfos);
 
     const payload = {
         embeds: [
@@ -112,6 +111,7 @@ function sendWebhook() {
             if (response.ok) {
                 console.log("Webhook enviado com sucesso!");
                 saveLatestVersion();
+                sendRoleNotification(webhookUrl);
             } else {
                 console.error("Erro ao enviar webhook:", response.status, response.statusText);
             }
@@ -135,4 +135,30 @@ function savePatchDraft() {
     const saveRef = serverSelect + "_draft";
     console.log("Salvo rascunho " + patchNotes + " para o saveRef = " + saveRef);
     localStorage.setItem(saveRef, patchNotes);
+}
+
+function sendRoleNotification(webhookUrl) {
+    const message = "<@&939951821701644328>";
+
+    const payload = {
+        content: message
+    };
+
+    fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Mensagem adicional enviada com sucesso!");
+            } else {
+                console.error("Erro ao enviar mensagem adicional:", response.status, response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error("Erro de conexão ao enviar mensagem adicional:", error);
+        });
 }
