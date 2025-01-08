@@ -64,9 +64,9 @@ function getServerInfo() {
 
 function getWebhookTitle() {
     const serverSelected = document.getElementById("patch-server").value;
-    const versionNumber = document.getElementById("patch-version").value;
+    const versionNumber = document.getElementById("patch-version").value || undefined;
 
-    return "__**Nota de atualização " + serverSelected + "**__ `" + versionNumber + "`";
+    return "__**Nota de atualização " + serverSelected + "**__" + (versionNumber != undefined ? " `" + versionNumber + "`" : '');
 }
 
 function sendWebhook() {
