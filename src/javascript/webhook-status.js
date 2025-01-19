@@ -34,7 +34,7 @@ function sendStatusWebhook() {
 }
 
 function tipoDeWebhook() {
-    const tipoSelecionado = document.getElementById('webhook-type').value;
+    const tipoSelecionado = document.getElementById('status-type').value;
 
     switch (tipoSelecionado) {
         case "manutencaoAgendada":
