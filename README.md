@@ -19,5 +19,5 @@
   <h1>⭐ Showcase</h1>
   <br>
   <img src="https://github.com/user-attachments/assets/a8927e00-b55b-47c8-bdfc-83d0ed2ffd07"></img>
-  <img src="https://github.com/user-attachments/assets/0d54d866-40ad-4e0f-a096-e6ed345535fd"></img>
+  <img src="https://github.com/user-attachments/assets/0d54d866-40ad-4e0f-a096-e6ed345535fd" width=100%></img>
 </div>
