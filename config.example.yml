@@ -1,0 +1,52 @@
+# Bot token. You can also set it through the DISCORD_TOKEN environment variable.
+token: "PUT_YOUR_BOT_TOKEN_HERE"
+
+# Channel the bot should watch.
+target_channel_id: "1524772398358991070"
+
+# Delete the original message after reposting it through the webhook.
+delete_original: true
+
+# Roles mentioned in the next message, right after the embed.
+mentioned_roles:
+  - "123456789012345678"
+
+# Use {roles} where the role mentions should appear.
+mention_message: "{roles}"
+
+webhook:
+  # If id and token are empty, the bot creates or reuses a webhook automatically.
+  id: ""
+  token: ""
+
+  default_name: "Patch Notes"
+  avatar_url: ""
+
+  title: ""
+  footer: "My Company"
+  footer_icon_url: ""
+
+  # Use "random" or a hexadecimal color, for example "#ff9900".
+  color: "random"
+  timestamp: true
+
+  # When true, shows the original author in the embed.
+  show_original_author: false
+
+  # Used only when show_original_author is false.
+  author_name: ""
+  author_icon_url: ""
+
+  thumbnail_url: ""
+  image_url: ""
+
+# Creates a discussion thread on the patch notes message.
+thread:
+  enabled: true
+  name: "Patch Notes Discussion"
+  # Allowed values: 60, 1440, 4320, 10080.
+  auto_archive_duration: 1440
+
+reactions:
+  up: "\u2B06\uFE0F"
+  down: "\u2B07\uFE0F"

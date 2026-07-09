@@ -1,0 +1,17 @@
+{
+  "name": "discord-webhook-sender",
+  "version": "1.0.0",
+  "description": "Simple bot that republishes channel messages as formatted Discord webhook embeds.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^13.17.1",
+    "yaml": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
