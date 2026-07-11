@@ -103,7 +103,16 @@ After inviting the bot, check the channel configured in `target_channel_id` and 
 
 </details>
 
-## Configuration
+## VPS Setup and configuration
+
+Fast Patch Notes is designed to stay online, so a VPS is a great place to run it. The example below assumes a Linux VPS, connected through SSH, with Node.js 20 or newer available.
+
+Clone [fast-patch-notes](https://github.com/leogianfagna/fast-patch-notes.git) into your VPS:
+
+```bash
+git clone https://github.com/leogianfagna/fast-patch-notes.git
+cd fast-patch-notes
+```
 
 Install dependencies:
 
@@ -111,10 +120,11 @@ Install dependencies:
 npm install
 ```
 
-Copy the example config and start editing it:
+Copy the example file and open your config:
 
 ```bash
-copy config.example.yml config.yml
+cp config.example.yml config.yml
+nano config.yml
 ```
 
 ### Bot Token
@@ -163,7 +173,7 @@ mentioned_roles:
 npm start
 ```
 
-You should see after this:
+You should see something like this:
 ```bash
 > fast-patch-notes@1.0.0 start
 > node src/index.js
@@ -172,4 +182,22 @@ Bot online as YOUR-BOT#2826. Configured channel: 1524803982105772213.
 Watching channel 1524803982105772213.
 ```
 
+### Keep It Online With PM2
+
+On a VPS, you usually want the bot to keep running after you close the SSH session. Install PM2 and start the bot with it:
+
+```bash
+sudo npm install -g pm2
+pm2 start src/index.js --name fast-patch-notes
+pm2 save
+pm2 startup
+```
+
+Useful PM2 commands:
+
+```bash
+pm2 logs fast-patch-notes
+pm2 restart fast-patch-notes
+pm2 stop fast-patch-notes
+```
 Enyoy 👍
