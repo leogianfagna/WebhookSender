@@ -105,6 +105,31 @@ function roleIdsFromConfig() {
     .filter((roleId) => /^\d{17,20}$/.test(roleId));
 }
 
+function webhookCredentialsFromConfig() {
+  if (webhookConfig.url) {
+    const match = String(webhookConfig.url).trim()
+      .match(/^https:\/\/(?:discord\.com|discordapp\.com)\/api\/webhooks\/(\d{17,20})\/([^/?#\s]+)(?:[/?#].*)?$/);
+
+    if (!match) {
+      throw new Error('Invalid webhook.url. Expected: https://discord.com/api/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN');
+    }
+
+    return {
+      id: match[1],
+      token: match[2]
+    };
+  }
+
+  if (webhookConfig.id && webhookConfig.token) {
+    return {
+      id: String(webhookConfig.id),
+      token: String(webhookConfig.token)
+    };
+  }
+
+  return null;
+}
+
 function threadNameFromConfig(sentMessage) {
   const fallbackName = `${webhookName} Discussion`;
   const template = threadConfig.name || fallbackName;
@@ -173,11 +198,9 @@ async function ensureWebhook(channel) {
     return cachedWebhook;
   }
 
-  if (webhookConfig.id && webhookConfig.token) {
-    cachedWebhook = new WebhookClient({
-      id: String(webhookConfig.id),
-      token: String(webhookConfig.token)
-    });
+  const webhookCredentials = webhookCredentialsFromConfig();
+  if (webhookCredentials) {
+    cachedWebhook = new WebhookClient(webhookCredentials);
     return cachedWebhook;
   }
 
@@ -278,10 +301,13 @@ async function checkChannelPermissions(channel) {
     Permissions.FLAGS.VIEW_CHANNEL,
     Permissions.FLAGS.SEND_MESSAGES,
     Permissions.FLAGS.MANAGE_MESSAGES,
-    Permissions.FLAGS.MANAGE_WEBHOOKS,
     Permissions.FLAGS.ADD_REACTIONS,
     Permissions.FLAGS.READ_MESSAGE_HISTORY
   ];
+
+  if (!webhookCredentialsFromConfig()) {
+    requiredPermissions.push(Permissions.FLAGS.MANAGE_WEBHOOKS);
+  }
 
   if (threadConfig.enabled !== false) {
     requiredPermissions.push(
