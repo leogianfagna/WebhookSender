@@ -1,23 +1,79 @@
-# Discord Webhook Sender
+<br/>
 
-A simple Discord bot that watches one channel, deletes messages sent there, and republishes their content as a formatted webhook embed. The original text is placed in the embed description, so Discord Markdown such as lists, bold text, inline code, code blocks, links, and visual mentions stays intact.
+<table>
+  <tr>
+    <td width="58%" valign="middle">
+      <h1>Fast Patch Notes</h1>
+      <p>
+        <strong>A Discord bot that turns quick messages into standardized patch notes.</strong>
+      </p>
+      <p>
+        Write a simple update in the configured channel and let the bot handle the rest:
+        it republishes the message as a webhook embed, creates a discussion thread,
+        mentions configured roles and adds feedback reactions.
+      </p>
+      <p>
+        <img src="https://img.shields.io/badge/Discord-Bot-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Bot" />
+        <img src="https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js 20+" />
+        <img src="https://img.shields.io/badge/Webhook-Embeds-00C7D9?style=for-the-badge" alt="Webhook Embeds" />
+      </p>
+    </td>
+    <td width="42%" align="center" valign="middle">
+      <img src=".github/logo.png" width="320" alt="Fast Patch Notes logo" />
+    </td>
+  </tr>
+</table>
 
-When `mentioned_roles` is configured, the role mention message is also sent by the same webhook to keep the same visual name and avatar.
+<div align="center"><strong>FULLY CUSTOMIZABLE!</strong></div>
+
+<br/>
+
+<div align="center">
+  <h2>Features</h2>
+</div>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Automatic patch notes</h3>
+      <p>Turns regular messages into organized embeds while preserving lists and line breaks.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Webhook publishing</h3>
+      <p>Uses a configured webhook or automatically creates one with a custom name and avatar.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>Discussion threads</h3>
+      <p>Creates a thread on the patch notes message to keep update discussions in one place.</p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>Mentions and reactions</h3>
+      <p>Sends configured role mentions and adds positive and negative feedback reactions.</p>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<div align="center">
+  <h2>Preview</h2>
+  <p>See the bot formatting a message into patch notes.</p>
+  <img src=".github/example.gif" alt="Fast Patch Notes demo" width="860" />
+</div>
+
+<br/>
 
 ## Requirements
 
 - Node.js 20 or newer
 - A bot created in the Discord Developer Portal
 - `Message Content Intent` enabled for the bot
-- Channel permissions:
-  - View Channels
-  - Send Messages
-  - Manage Messages
-  - Manage Webhooks
-  - Add Reactions
-  - Read Message History
-  - Create Public Threads
-  - Send Messages in Threads
+- Discord channel permissions for messages, webhooks, reactions and threads
+
+<details>
+  <summary><strong>How to create and invite a bot</strong></summary>
 
 ## Invite The Bot
 
@@ -43,82 +99,77 @@ When `mentioned_roles` is configured, the role mention message is also sent by t
 
 6. Copy the generated URL at the bottom of the page and open it in your browser.
 
-You can also use this template URL, replacing `YOUR_CLIENT_ID` with your bot's **Application ID / Client ID**:
+After inviting the bot, check the channel configured in `target_channel_id` and make sure the bot role can view and send messages there.
 
-```text
-https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=309774593088&scope=bot
-```
-
-After inviting the bot, also check the channel configured in `target_channel_id` and make sure the bot role can view and send messages in that channel.
+</details>
 
 ## Configuration
 
-1. Install dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Copy the example config:
+Copy the example config and start editing it:
 
 ```bash
 copy config.example.yml config.yml
 ```
 
-In PowerShell, this also works:
+### Bot Token
 
-```powershell
-Copy-Item config.example.yml config.yml
+Your bot created in the [Discord Developer Portal](https://discord.com/developers/applications) has a token. Copy it and place it in `token`:
+
+```yml
+# Bot token. You can also set it through the DISCORD_TOKEN environment variable.
+token: "PUT_YOUR_BOT_TOKEN_HERE"
 ```
 
-3. Edit `config.yml`
+<div align="center">
+  <img src=".github/bot-token.png" alt="Discord bot token configuration" width="100%" />
+</div>
 
-### Main Fields
+### Target Channel
 
-- `token`: bot token. You can also provide it through the `DISCORD_TOKEN` environment variable.
-- `target_channel_id`: channel the bot should watch.
-- `delete_original`: when `true`, deletes the original message after the webhook sends the formatted version.
-- `mentioned_roles`: roles that will be mentioned in the next message sent by the same webhook.
-- `mention_message`: text used for the mention message. Use `{roles}` where the role mentions should appear.
-- `webhook.default_name`: name used by the webhook.
-- `webhook.avatar_url`: avatar used by the webhook. Leave it empty to use Discord's default.
-- `webhook.footer`: embed footer.
-- `webhook.color`: embed color in hexadecimal, such as `#ff9900`, or `random`.
-- `webhook.show_original_author`: when `true`, shows the original message author in the embed.
-- `thread.enabled`: when `true`, creates a discussion thread on the patch notes message.
-- `thread.name`: optional custom thread name. You can use `{webhook_name}` and `{message_id}` placeholders.
-- `thread.auto_archive_duration`: thread auto-archive duration in minutes. Discord accepts `60`, `1440`, `4320`, or `10080`.
-- `reactions.up` and `reactions.down`: reactions added by the bot to the formatted message.
+The bot listens to one text channel in your server. Copy that channel ID and place it in `target_channel_id`:
 
-If `webhook.id` and `webhook.token` are empty, the bot automatically creates or reuses a webhook in the channel. This requires the `Manage Webhooks` permission.
+```yml
+# Channel the bot should watch.
+target_channel_id: "1524803982105772213"
+```
 
-## Start
+<div align="center">
+  <img src=".github/bot-channel.png" alt="Discord target channel ID configuration" width="260" />
+</div>
+
+### Mentioned Roles
+
+The bot can mention roles to notify players. Add every role ID you want to notify to the `mentioned_roles` array:
+
+```yml
+# Roles mentioned in the next message, right after the embed.
+mentioned_roles:
+  - "123456789012345678"
+```
+
+<div align="center">
+  <img src=".github/bot-roles.png" alt="Discord mentioned roles configuration" width="100%" />
+</div>
+
+## Start The Bot
 
 ```bash
 npm start
 ```
 
-## Common Errors
+You should see after this:
+```bash
+> fast-patch-notes@1.0.0 start
+> node src/index.js
 
-### Missing Access
-
-If `Missing Access` appears, the bot started correctly, but Discord denied access to the channel configured in `target_channel_id`.
-
-Check that:
-
-- the bot is in the same server as the channel;
-- `target_channel_id` is actually the channel ID, not a category, server, or message ID;
-- the bot role can view the channel;
-- the bot role is not blocked by channel-specific role overwrites;
-- the channel allows `View Channels`, `Send Messages`, `Manage Messages`, `Manage Webhooks`, `Add Reactions`, `Read Message History`, `Create Public Threads`, and `Send Messages in Threads`.
-
-## Example
-
-Original message:
-
-```text
-- Fixed Mirage map without PvP.
-- Fixed Besta Treta without arrows in the starter kit.
+Bot online as YOUR-BOT#2826. Configured channel: 1524803982105772213.
+Watching channel 1524803982105772213.
 ```
 
-The bot deletes the original message, sends an embed through the webhook while preserving the list formatting, creates a discussion thread on that patch notes message, sends the configured role mentions through the same webhook, and reacts with up/down arrows.
+Enyoy 👍

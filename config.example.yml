@@ -15,9 +15,8 @@ mentioned_roles:
 mention_message: "{roles}"
 
 webhook:
-  # If id and token are empty, the bot creates or reuses a webhook automatically.
-  id: ""
-  token: ""
+  # Paste the full Discord webhook URL here.
+  url: "https://discord.com/api/webhooks/WEBHOOK_ID/WEBHOOK_TOKEN"
 
   default_name: "Patch Notes"
   avatar_url: ""

@@ -1,5 +1,5 @@
 {
-  "name": "discord-webhook-sender",
+  "name": "fast-patch-notes",
   "version": "1.0.0",
   "description": "Simple bot that republishes channel messages as formatted Discord webhook embeds.",
   "type": "module",
