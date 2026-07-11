@@ -60,7 +60,7 @@
 <div align="center">
   <h2>Preview</h2>
   <p>See the bot formatting a message into patch notes.</p>
-  <img src=".github/Gravando%202026-07-11%20111810.gif" alt="Fast Patch Notes demo" width="860" />
+  <img src=".github/example.gif" alt="Fast Patch Notes demo" width="860" />
 </div>
 
 <br/>
@@ -121,35 +121,31 @@ copy config.example.yml config.yml
 
 Your bot created in the [Discord Developer Portal](https://discord.com/developers/applications) has a token. Copy it and place it in `token`:
 
-<div align="center">
-  <img src=".github/bot-token.png" alt="Discord bot token configuration" width="720" />
-</div>
-
 ```yml
 # Bot token. You can also set it through the DISCORD_TOKEN environment variable.
 token: "PUT_YOUR_BOT_TOKEN_HERE"
 ```
 
+<div align="center">
+  <img src=".github/bot-token.png" alt="Discord bot token configuration" width="100%" />
+</div>
+
 ### Target Channel
 
 The bot listens to one text channel in your server. Copy that channel ID and place it in `target_channel_id`:
-
-<div align="center">
-  <img src=".github/bot-channel.png" alt="Discord target channel ID configuration" width="720" />
-</div>
 
 ```yml
 # Channel the bot should watch.
 target_channel_id: "1524803982105772213"
 ```
 
+<div align="center">
+  <img src=".github/bot-channel.png" alt="Discord target channel ID configuration" width="260" />
+</div>
+
 ### Mentioned Roles
 
 The bot can mention roles to notify players. Add every role ID you want to notify to the `mentioned_roles` array:
-
-<div align="center">
-  <img src=".github/bot-roles.png" alt="Discord mentioned roles configuration" width="720" />
-</div>
 
 ```yml
 # Roles mentioned in the next message, right after the embed.
@@ -157,8 +153,23 @@ mentioned_roles:
   - "123456789012345678"
 ```
 
+<div align="center">
+  <img src=".github/bot-roles.png" alt="Discord mentioned roles configuration" width="100%" />
+</div>
+
 ## Start The Bot
 
 ```bash
 npm start
 ```
+
+You should see after this:
+```bash
+> fast-patch-notes@1.0.0 start
+> node src/index.js
+
+Bot online as YOUR-BOT#2826. Configured channel: 1524803982105772213.
+Watching channel 1524803982105772213.
+```
+
+Enyoy 👍
