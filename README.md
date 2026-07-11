@@ -5,12 +5,12 @@
     <td width="58%" valign="middle">
       <h1>Fast Patch Notes</h1>
       <p>
-        <strong>Bot para Discord que transforma suas mensagens rápidas em patch notes padronizados.</strong>
+        <strong>A Discord bot that turns quick messages into standardized patch notes.</strong>
       </p>
       <p>
-        Escreva uma atualização simples no canal configurado e deixe o bot cuidar do resto:
-        ele republica a mensagem como embed por webhook, cria uma thread de discussão,
-        menciona cargos configurados e adiciona reações para feedback.
+        Write a simple update in the configured channel and let the bot handle the rest:
+        it republishes the message as a webhook embed, creates a discussion thread,
+        mentions configured roles and adds feedback reactions.
       </p>
       <p>
         <img src="https://img.shields.io/badge/Discord-Bot-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Bot" />
@@ -24,6 +24,8 @@
   </tr>
 </table>
 
+<div align="center"><strong>FULLY CUSTOMIZABLE!</strong></div>
+
 <br/>
 
 <div align="center">
@@ -33,22 +35,22 @@
 <table>
   <tr>
     <td width="50%" valign="top">
-      <h3>Patch notes automaticos</h3>
-      <p>Transforma mensagens comuns em embeds organizados, mantendo listas e quebras de linha.</p>
+      <h3>Automatic patch notes</h3>
+      <p>Turns regular messages into organized embeds while preserving lists and line breaks.</p>
     </td>
     <td width="50%" valign="top">
-      <h3>Envio por webhook</h3>
-      <p>Usa um webhook configurado ou cria um automaticamente para publicar com nome e avatar personalizados.</p>
+      <h3>Webhook publishing</h3>
+      <p>Uses a configured webhook or automatically creates one with a custom name and avatar.</p>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <h3>Threads de discussao</h3>
-      <p>Cria uma thread na mensagem de patch notes para centralizar conversas sobre a atualizacao.</p>
+      <h3>Discussion threads</h3>
+      <p>Creates a thread on the patch notes message to keep update discussions in one place.</p>
     </td>
     <td width="50%" valign="top">
-      <h3>Mencoes e reacoes</h3>
-      <p>Envia mencoes de cargos configurados e adiciona reacoes de voto positivo e negativo.</p>
+      <h3>Mentions and reactions</h3>
+      <p>Sends configured role mentions and adds positive and negative feedback reactions.</p>
     </td>
   </tr>
 </table>
@@ -57,8 +59,8 @@
 
 <div align="center">
   <h2>Preview</h2>
-  <p>Veja o fluxo do bot formatando uma mensagem em patch notes.</p>
-  <img src=".github/Gravando%202026-07-11%20111810.gif" alt="Demonstração do Fast Patch Notes" width="860" />
+  <p>See the bot formatting a message into patch notes.</p>
+  <img src=".github/Gravando%202026-07-11%20111810.gif" alt="Fast Patch Notes demo" width="860" />
 </div>
 
 <br/>
@@ -109,39 +111,54 @@ Install dependencies:
 npm install
 ```
 
-Copy the example config:
+Copy the example config and start editing it:
 
 ```bash
 copy config.example.yml config.yml
 ```
 
-Edit `config.yml` and start the bot:
+### Bot Token
+
+Your bot created in the [Discord Developer Portal](https://discord.com/developers/applications) has a token. Copy it and place it in `token`:
+
+<div align="center">
+  <img src=".github/bot-token.png" alt="Discord bot token configuration" width="720" />
+</div>
+
+```yml
+# Bot token. You can also set it through the DISCORD_TOKEN environment variable.
+token: "PUT_YOUR_BOT_TOKEN_HERE"
+```
+
+### Target Channel
+
+The bot listens to one text channel in your server. Copy that channel ID and place it in `target_channel_id`:
+
+<div align="center">
+  <img src=".github/bot-channel.png" alt="Discord target channel ID configuration" width="720" />
+</div>
+
+```yml
+# Channel the bot should watch.
+target_channel_id: "1524803982105772213"
+```
+
+### Mentioned Roles
+
+The bot can mention roles to notify players. Add every role ID you want to notify to the `mentioned_roles` array:
+
+<div align="center">
+  <img src=".github/bot-roles.png" alt="Discord mentioned roles configuration" width="720" />
+</div>
+
+```yml
+# Roles mentioned in the next message, right after the embed.
+mentioned_roles:
+  - "123456789012345678"
+```
+
+## Start The Bot
 
 ```bash
 npm start
 ```
-
-## Example
-
-Original message:
-
-```text
-- Fixed Mirage map without PvP.
-- Fixed Besta Treta without arrows in the starter kit.
-```
-
-Fast Patch Notes deletes the original message, sends a formatted embed through the webhook, creates a discussion thread, sends the configured role mentions and reacts with the configured arrows.
-
-## Common Errors
-
-### Missing Access
-
-If `Missing Access` appears, the bot started correctly, but Discord denied access to the channel configured in `target_channel_id`.
-
-Check that:
-
-- the bot is in the same server as the channel;
-- `target_channel_id` is actually the channel ID, not a category, server or message ID;
-- the bot role can view the channel;
-- the bot role is not blocked by channel-specific role overwrites;
-- the channel allows `View Channels`, `Send Messages`, `Manage Messages`, `Manage Webhooks`, `Add Reactions`, `Read Message History`, `Create Public Threads` and `Send Messages in Threads`.
